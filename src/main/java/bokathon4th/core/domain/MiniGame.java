@@ -11,7 +11,7 @@ public class MiniGame {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;  // 미니게임 ID
+    private Long id;  // 미니게임 ID
 
     @Column(nullable = false)
     private String name;  // 미니게임 이름
