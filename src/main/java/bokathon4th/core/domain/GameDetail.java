@@ -13,7 +13,7 @@ public class GameDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;  // 게임 아이디 (Primary Key)
+    private Long id;  // 게임 아이디 (Primary Key)
 
     @Column(nullable = false)
     private String name;  // 게임 이름
