@@ -6,15 +6,15 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RecommendGameResponse {
+public class GameRecommendResponse {
     private Integer id;
     private String name;
     private int minPlayerCount;
     private int maxPlayerCount;
     private String imageUrl;
 
-    public static RecommendGameResponse from(GameDetail game) {
-        return new RecommendGameResponse(
+    public static GameRecommendResponse from(GameDetail game) {
+        return new GameRecommendResponse(
                 game.getId(),
                 game.getName(),
                 game.getMinPlayerCount(),

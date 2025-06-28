@@ -1,4 +1,15 @@
 package bokathon4th.core.repository;
 
-public interface GameDetailRepository {
+import bokathon4th.core.domain.GameDetail;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+
+public interface GameDetailRepository extends JpaRepository<GameDetail, Long> {
+
+    @Query("SELECT g FROM GameDetail g WHERE :people BETWEEN g.minPlayerCount AND g.maxPlayerCount")
+    List<GameDetail> findPlayableGamesByPeople(@Param("people") int people);
+
 }

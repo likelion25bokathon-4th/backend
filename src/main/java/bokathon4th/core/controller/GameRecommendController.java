@@ -3,7 +3,7 @@ package bokathon4th.core.controller;
 
 import bokathon4th.core.dto.response.ApiResponse;
 import bokathon4th.core.dto.response.GameDetailResponse;
-import bokathon4th.core.dto.response.RecommendGameResponse;
+import bokathon4th.core.dto.response.GameRecommendResponse;
 import bokathon4th.core.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class GameRecommendController {
                     new ApiResponse<>(false, "E400", "유효한 인원 수를 입력해주세요.", null));
         }
 
-        List<RecommendGameResponse> games = gameService.getRecommendedGames(people);
+        List<GameRecommendResponse> games = gameService.getRecommendedGames(people);
 
         if (games.isEmpty()) {
             return ResponseEntity.status(404).body(
