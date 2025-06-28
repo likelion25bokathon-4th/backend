@@ -27,7 +27,7 @@ public class MiniGameController {
         return ResponseEntity.ok(games);
     }
 
-    @GetMapping("/{id}/initial")
+    @GetMapping("/{id}")
     public ResponseEntity<Map<String, String>> getInitial(@PathVariable Long id) {
         String initial = initialGameService.getRandomInitial(id);
         return ResponseEntity.ok(Map.of("initials", initial));

@@ -1,13 +1,14 @@
 package bokathon4th.core.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Check;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor @AllArgsConstructor
 @Check(constraints = "difficulty >= 1 AND difficulty <= 5")
 public class GameDetail {
 

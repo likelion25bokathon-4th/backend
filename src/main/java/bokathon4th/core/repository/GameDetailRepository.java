@@ -6,10 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GameDetailRepository extends JpaRepository<GameDetail, Long> {
 
     @Query("SELECT g FROM GameDetail g WHERE :people BETWEEN g.minPlayerCount AND g.maxPlayerCount")
     List<GameDetail> findPlayableGamesByPeople(@Param("people") int people);
 
+    Optional<GameDetail> findByName(String name);
 }
