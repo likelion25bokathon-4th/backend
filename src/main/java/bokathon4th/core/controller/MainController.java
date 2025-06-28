@@ -34,6 +34,11 @@ public class MainController {
     @PostMapping("/search")
     public ResponseEntity<ApiResponse<List<GameDetailResponse>>> searchGames(@RequestBody SearchGameRequest request) {
         List<GameDetailResponse> results = mainService.searchGamesByKeyword(request.getName());
+
+        if (results.isEmpty()) {
+            return ResponseEntity.ok(new ApiResponse<>(false, "E404", "일치하는 게임이 없습니다.", results));
+        }
+
         return ResponseEntity.ok(new ApiResponse<>(true, "S200", "게임 검색 성공", results));
     }
 }
