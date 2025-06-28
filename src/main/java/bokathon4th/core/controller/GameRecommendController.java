@@ -4,7 +4,7 @@ package bokathon4th.core.controller;
 import bokathon4th.core.dto.response.ApiResponse;
 import bokathon4th.core.dto.response.GameDetailResponse;
 import bokathon4th.core.dto.response.GameRecommendResponse;
-import bokathon4th.core.service.GameService;
+import bokathon4th.core.service.GameRecommendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/recommend")
 public class GameRecommendController {
-    private final GameService gameService;
+    private final GameRecommendService gameService;
 
     // ✅ 1. 인원 수 기반 게임 추천 리스트
     @GetMapping

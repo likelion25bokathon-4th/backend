@@ -16,9 +16,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/minigame")
-@RestController
-@RequiredArgsConstructor
-@RequestMapping("/minigame")
+
 public class MiniGameController {
 
     private final MiniGameService miniGameService;
