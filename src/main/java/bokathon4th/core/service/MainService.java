@@ -44,11 +44,17 @@ public class MainService {
     }
 
     public List<GameDetailResponse> searchGamesByKeyword(String keyword) {
-        return gameDetailRepository.findByName(keyword)
-                .map(List::of) // Optional → List
-                .orElse(List.of()) // 없으면 빈 리스트
-                .stream()
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return List.of();
+        }
+
+        // 공백 제거 및 소문자 처리
+        String cleanedKeyword = keyword.replaceAll("\\s+", "").toLowerCase();
+
+        return gameDetailRepository.findAll().stream()
+                .filter(game -> game.getName().replaceAll("\\s+", "").toLowerCase().equals(cleanedKeyword))
                 .map(GameDetailResponse::of)
                 .collect(Collectors.toList());
     }
+
 }
