@@ -15,7 +15,7 @@ public class GameRecommendResponse {
 
     public static GameRecommendResponse from(GameDetail game) {
         return new GameRecommendResponse(
-                game.getId(),
+                Math.toIntExact(game.getId()),
                 game.getName(),
                 game.getMinPlayerCount(),
                 game.getMaxPlayerCount(),
