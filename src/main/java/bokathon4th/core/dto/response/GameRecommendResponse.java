@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class GameRecommendResponse {
-    private Integer id;
+    private Long id;
     private String name;
     private int minPlayerCount;
     private int maxPlayerCount;

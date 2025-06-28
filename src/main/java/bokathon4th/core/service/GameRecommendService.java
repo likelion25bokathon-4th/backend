@@ -23,11 +23,4 @@ public class GameRecommendService {
                 .map(GameRecommendResponse::from)
                 .toList();
     }
-
-    // ID 기반 상세 조회
-    public GameDetailResponse getGameDetail(Long id) {
-        return gameDetailRepository.findById(id)
-                .map(GameDetailResponse::of)
-                .orElse(null);  // 못 찾으면 null 반환
-    }
 }
