@@ -13,13 +13,10 @@ public class GameDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // 게임 아이디 (Primary Key)
+    private Integer id;  // 게임 아이디 (Primary Key)
 
     @Column(nullable = false)
     private String name;  // 게임 이름
-
-    @Column(nullable = false)
-    private Integer realSuggestNumPlayer;  // 가장 적정 인원
 
     @Column(nullable = false)
     private Integer minPlayerCount;  // 적정 인원 최소

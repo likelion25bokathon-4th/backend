@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/recommend")
-public class GameMainController {
+public class GameRecommendController {
     private final GameService gameService;
 
     // ✅ 1. 인원 수 기반 게임 추천 리스트
