@@ -1,6 +1,7 @@
 package bokathon4th.core.controller;
 
 
+import bokathon4th.core.dto.request.PeopleRequest;
 import bokathon4th.core.dto.response.ApiResponse;
 import bokathon4th.core.dto.response.GameDetailResponse;
 import bokathon4th.core.dto.response.GameRecommendResponse;
@@ -19,7 +20,8 @@ public class GameRecommendController {
 
     // ✅ 1. 인원 수 기반 게임 추천 리스트
     @GetMapping
-    public ResponseEntity<?> recommendGames(@RequestParam int people) {
+    public ResponseEntity<?> recommendGames(@RequestBody PeopleRequest request) {
+        int people = request.getPeople();
         if (people < 1) {
             return ResponseEntity.badRequest().body(
                     new ApiResponse<>(false, "E400", "유효한 인원 수를 입력해주세요.", null));
