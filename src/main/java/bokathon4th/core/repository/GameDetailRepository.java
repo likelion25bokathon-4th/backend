@@ -14,4 +14,8 @@ public interface GameDetailRepository extends JpaRepository<GameDetail, Long> {
     List<GameDetail> findPlayableGamesByPeople(@Param("people") int people);
 
     Optional<GameDetail> findByName(String name);
+
+    @Query(value = "SELECT * FROM GAME_DETAIL ORDER BY RAND() LIMIT 5", nativeQuery = true)
+    List<GameDetail> findRandom5();
+
 }

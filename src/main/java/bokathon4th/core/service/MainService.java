@@ -1,28 +1,54 @@
 package bokathon4th.core.service;
 
 import bokathon4th.core.domain.GameDetail;
-import bokathon4th.core.dto.request.SearchGameRequest;
 import bokathon4th.core.dto.response.GameDetailResponse;
+import bokathon4th.core.dto.response.MainResponse;
 import bokathon4th.core.repository.GameDetailRepository;
-import bokathon4th.core.repository.MiniGameRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static bokathon4th.core.dto.response.MainResponse.*;
 
 @Service
 @RequiredArgsConstructor
 public class MainService {
+
     private final GameDetailRepository gameDetailRepository;
-    private final MiniGameRepository miniGameRepository;
 
-    //검색
+    public MainResponse loadMainData() {
+        List<Option> options = List.of(
+                new Option("추천게임", "추천 게임 보기"),
+                new Option("미니게임", "미니게임")
+        );
 
-    public GameDetailResponse searchGame(SearchGameRequest request){
-        GameDetail gameDetail=gameDetailRepository.findByName(request.getName())
-                .orElseThrow(()->new EntityNotFoundException("검색 결과가 없습니다."));
+        List<RecommendedGame> recommendedGames = gameDetailRepository.findRandom5()
+                .stream()
+                .map(game -> RecommendedGame.builder()
+                        .id(game.getId())
+                        .name(game.getName())
+                        .imageUrl(game.getImageUrl())
+                        .difficulty(game.getDifficulty())
+                        .minPlayerCount(game.getMinPlayerCount())
+                        .maxPlayerCount(game.getMaxPlayerCount())
+                        .build())
+                .collect(Collectors.toList());
 
-        return GameDetailResponse.of(gameDetail);
-
+        return MainResponse.builder()
+                .bannerMessage("이달의 술게임 추천 🍻")
+                .options(options)
+                .recommendedGames(recommendedGames)
+                .build();
     }
 
-//추천 or 미니게임 선택
+    public List<GameDetailResponse> searchGamesByKeyword(String keyword) {
+        return gameDetailRepository.findByName(keyword)
+                .map(List::of) // Optional → List
+                .orElse(List.of()) // 없으면 빈 리스트
+                .stream()
+                .map(GameDetailResponse::of)
+                .collect(Collectors.toList());
+    }
+}
