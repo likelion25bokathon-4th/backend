@@ -14,10 +14,14 @@ public class GameRecommendService {
 
     private final GameDetailRepository gameDetailRepository;
 
-    // 인원 수 기반 추천
-    public List<GameRecommendResponse> getRecommendedGames(int people) {
-        List<GameDetail> games = gameDetailRepository
-                .findPlayableGamesByPeople(people);
+    public List<GameRecommendResponse> getRecommendedGames(Integer people) {
+        List<GameDetail> games;
+
+        if (people == null) {
+            games = gameDetailRepository.findAll();
+        } else {
+            games = gameDetailRepository.findPlayableGamesByPeople(people);
+        }
 
         return games.stream()
                 .map(GameRecommendResponse::from)
